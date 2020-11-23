@@ -1,7 +1,7 @@
 # coding: utf-8
 # license: GPLv3
 
-Grav = 9.8  # Ускорение свободного падения для снаряда.
+Grav = 9.8  # Ускорение свободного падения
 
 class Planet:
     """
@@ -36,6 +36,7 @@ class Planet:
 
     image = None
     """Изображение планеты"""
+
     def __init__(self, m, x, y, Fx, Fy, R, color):
         self.m = m
         self.x = x
