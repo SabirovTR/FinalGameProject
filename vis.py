@@ -27,7 +27,7 @@ def create_space_object_image(obj, surface):
 
 
 def create_space_ship_image(ship, surface):
-"""Создает корабль""""
+"""Создает корабль"""
     rotation_angle = 180 + (180 / math.pi) * math.atan2(ship.vx, ship.vy)
 
     space_ship_surface = pygame.image.load('Space_objects_images/SpaceShip0.jpg').convert_alpha()
