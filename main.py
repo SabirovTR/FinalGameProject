@@ -6,6 +6,12 @@ from space_model import *
 from space_objects import *
 
 
+import pygame
+import pygame_menu
+
+pygame.init()
+surface = pygame.display.set_mode((600, 400))
+
 def simulation_step(level, ship, space_obj, surface, time_step):
     """ Функция симуляции полета
     Расчитывает одно действие за промежуток time_step
@@ -54,8 +60,31 @@ def main():
             finished = True
         pygame.display.update()
 
-    pygame.quit()
 
+
+def set_level():
+    # Do the job here !
+    pass
+
+def set_ammunition():
+    # Do the job here !
+    pass
+
+def menu():
+
+    menu = pygame_menu.Menu(400, 500, 'HI DUDU',
+                           theme=pygame_menu.themes.THEME_DARK)
+
+    menu.add_text_input('Name :', default='aaaHHMED')
+    menu.add_selector('Level :', [('1st map', 1), ('2nd map', 2), ('3rd map', 3)], onchange=set_level())
+    menu.add_selector('Ammunition :', [('Engines', 1), ('Solar sail', 2)], onchange=set_ammunition())
+    menu.add_button('Play', main)
+    menu.add_button('Exit', pygame_menu.events.EXIT)
+
+
+    menu.mainloop(surface)
+
+menu()
 
 if __name__ == "__main__":
     main()
