@@ -9,7 +9,6 @@ window_height = 900
 
 
 def create_space_object_image(obj, surface):
-"""Создает космический объект"""
 
     if not obj.static:
         rotation_angle = (180 / math.pi) * math.atan2(obj.vy, obj.vx)
@@ -27,20 +26,21 @@ def create_space_object_image(obj, surface):
 
 
 def create_space_ship_image(ship, surface):
-"""Создает корабль"""
+
     rotation_angle = 180 + (180 / math.pi) * math.atan2(ship.vx, ship.vy)
 
-    space_ship_surface = pygame.image.load('Space_objects_images/SpaceShip0.jpg').convert_alpha()
+    space_ship_surface = pygame.image.load('Space_objects_images/SpaceShip1.jpg').convert_alpha()
     transformed_surface = pygame.transform.scale(space_ship_surface,
                                                  (space_ship_surface.get_width() // 30,
                                                   space_ship_surface.get_height() // 30))
     transformed_surface = pygame.transform.rotate(transformed_surface, rotation_angle)
     space_ship_rect = transformed_surface.get_rect(center=(ship.x, ship.y))
+    transformed_surface.set_colorkey((255, 255, 255))
     surface.blit(transformed_surface, space_ship_rect)
 
 
 def explosion(ship, surface):
-"""Взрыв"""
+
     explosion_surface = pygame.image.load('Space_objects_images/explosion.png').convert_alpha()
     transformed_surface = pygame.transform.scale(explosion_surface,
                                                  (explosion_surface.get_width() // 2,

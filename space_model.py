@@ -1,4 +1,4 @@
-G = 20
+G = 2
 """Игровая гравитационная постоянная Ньютона"""
 
 
@@ -17,8 +17,8 @@ def calculate_ship_acceleration(ship, space_obj):
             x = obj.x - ship.x
             y = obj.y - ship.y
             r = (x ** 2 + y ** 2) ** 0.5
-            ship.ax = G * obj.m / r ** 3 * x
-            ship.ay = G * obj.m / r ** 3 * y
+            ship.ax += G * obj.m / r ** 3 * x
+            ship.ay += G * obj.m / r ** 3 * y
 
 
 def calculate_object_acceleration(obj, space_obj):

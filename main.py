@@ -1,16 +1,10 @@
 import pygame
 from vis import *
 # from main_menu import *
-# from level_downloader import *
+from level_downloader import *
 from space_model import *
 from space_objects import *
 
-
-import pygame
-import pygame_menu
-
-pygame.init()
-surface = pygame.display.set_mode((600, 400))
 
 def simulation_step(level, ship, space_obj, surface, time_step):
     """ Функция симуляции полета
@@ -34,7 +28,9 @@ def main():
     game_surface = pygame.display.set_mode((window_width, window_height))
     clock = pygame.time.Clock()
     finished = False
-    time_step = 32
+    time_step = 100
+    (level, ship, space_obj) = download_level('Levels/3.txt')
+    '''
     level = Level()
     ship = SpaceShip()
     obj1 = SpaceObject()
@@ -46,13 +42,16 @@ def main():
     obj2.y = 400
     obj1.m = 20
     space_obj = [obj1, obj2]
+    '''
 
     while not finished:
         clock.tick(time_step)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 finished = True
-        simulation_step(level, ship, space_obj, game_surface, time_step)
+        pygame.display.update()
+        #game_surface.fill((0, 0, 0))
+        simulation_step(level, ship, space_obj, game_surface, time_step/200)
         if crash_criteria(ship, space_obj):
             explosion(ship, game_surface)
             pygame.display.update()
@@ -60,31 +59,8 @@ def main():
             finished = True
         pygame.display.update()
 
+    pygame.quit()
 
-
-def set_level():
-    # Do the job here !
-    pass
-
-def set_ammunition():
-    # Do the job here !
-    pass
-
-def menu():
-
-    menu = pygame_menu.Menu(400, 500, 'HI DUDU',
-                           theme=pygame_menu.themes.THEME_DARK)
-
-    menu.add_text_input('Name :', default='aaaHHMED')
-    menu.add_selector('Level :', [('1st map', 1), ('2nd map', 2), ('3rd map', 3)], onchange=set_level())
-    menu.add_selector('Ammunition :', [('Engines', 1), ('Solar sail', 2)], onchange=set_ammunition())
-    menu.add_button('Play', main)
-    menu.add_button('Exit', pygame_menu.events.EXIT)
-
-
-    menu.mainloop(surface)
-
-menu()
 
 if __name__ == "__main__":
     main()
