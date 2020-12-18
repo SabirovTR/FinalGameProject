@@ -1,0 +1,5 @@
+Level     1 1 test True False
+
+SpaceShip 1 600 400 2 0 0 0
+
+SpaceObj  WormHole False True 700 400 30 800 800

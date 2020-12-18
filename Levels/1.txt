@@ -1,0 +1,6 @@
+Level     1 1 test True False
+
+SpaceShip 1 590 400 0.08 0.5 0 0
+
+SpaceObj  Planet 30 200 400 0 0 0 0 True False 6
+SpaceObj  Planet 30 1000 400 0 0 0 0 True True 2
