@@ -4,3 +4,4 @@ SpaceShip 1 400 400 1 0 0 0
 
 SpaceObj Planet False True 600 400 400 0 0 0 0 6
 SpaceObj  WormHole False True 600 200 0 600 600
+SpaceObj  Enterance False True 800 400
