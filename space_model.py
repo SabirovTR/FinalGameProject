@@ -1,3 +1,4 @@
+import pygame
 import math
 
 G = 2
@@ -61,12 +62,13 @@ def calculate_ship_movement(ship, space_obj, time_step):
 
     calculate_ship_acceleration(ship, space_obj)
 
+    ship.trace.append((ship.x, ship.y))
+
     ship.vx += ship.ax * time_step
     ship.x += ship.vx * time_step + ship.ax * time_step ** 2 / 2
     ship.vy += ship.ay * time_step
     ship.y += ship.vy * time_step + ship.ay * time_step ** 2 / 2
     ship.angle = 180 + (180 / math.pi) * math.atan2(ship.vx, ship.vy)
-
     ship.ax = ship.ay = 0
 
 
@@ -90,7 +92,7 @@ def calculate_object_movement(obj, space_obj, time_step):
 
 def obj_interaction(ship, space_obj):
 
-    interaction_distance = 40
+    interaction_distance = 10
 
     explode = False
 
@@ -113,15 +115,25 @@ def obj_interaction(ship, space_obj):
                     ship.x += - 1.1 * interaction_distance * math.sin((math.pi / 180) * angle)
                     ship.y += 1.1 * interaction_distance * math.cos((math.pi / 180) * angle)
                     ship.vx = - v * math.sin((math.pi / 180) * angle)
-                    ship.vy = v * math.cos((math.pi / 180) * angle)
+                    ship.vy = - v * math.cos((math.pi / 180) * angle)
 
                 elif distance_out < interaction_distance:
                     ship.x = obj.x
                     ship.y = obj.y
                     angle = ship.angle - obj.rotation
                     v = (ship.vx ** 2 + ship.vy ** 2) ** 0.5
+                    ship.x += - 1.1 * interaction_distance * math.sin((math.pi / 180) * angle)
+                    ship.y += - 1.1 * interaction_distance * math.cos((math.pi / 180) * angle)
                     ship.vx = - v * math.sin((math.pi / 180) * angle)
-                    ship.vy = v * math.cos((math.pi / 180) * angle)
+                    ship.vy = - v * math.cos((math.pi / 180) * angle)
+
+            elif obj.type == 'Enterance':
+                x = obj.x - ship.x
+                y = obj.y - ship.y
+                distance = (x ** 2 + y ** 2) ** 0.5
+                if distance <= 4*interaction_distance:
+                    finished = True
+                    pygame.time.delay(2000)
 
             else:
                 x = obj.x - ship.x

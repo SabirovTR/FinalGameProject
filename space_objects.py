@@ -46,8 +46,9 @@ class SpaceShip():
 
     angle = 0
 
-
     engine = 2
+
+    trace = []
 
 
 
@@ -155,6 +156,11 @@ class WormHole(SpaceObj):
     y_out = 0
 
     image = 'WormHole'
+
+
+class Enterance(SpaceObj):
+
+    r = 0
 
 
 class AsteroidBelt(SpaceObj):

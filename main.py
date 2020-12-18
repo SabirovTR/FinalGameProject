@@ -1,16 +1,16 @@
 import pygame
 import math
 from vis import *
-from main_menu import *
+# from main_menu import *
 from level_downloader import *
 from space_model import *
 from space_objects import *
+
 
 def simulation_step(level, ship, space_obj, surface, time_step):
     """ Функция симуляции полета
     Расчитывает одно действие за промежуток time_step
     """
-
     calculate_system_movement(level, ship, space_obj, time_step)
     update_system_position(ship, space_obj, surface)
 
@@ -49,59 +49,15 @@ def main():
 
     print('Поехали!')
 
-    level = menu()
-    if level == 0:
-        (level, ship, space_obj) = download_level('Levels/1.txt')
-    if level == 1:
-        (level, ship, space_obj) = download_level('Levels/2.txt')
-    if level == 2:
-        (level, ship, space_obj) = download_level('Levels/3.txt')
-    if level == 3:
-        (level, ship, space_obj) = download_level('Levels/4.txt')
-    if level == 4:
-        (level, ship, space_obj) = download_level('Levels/5.txt')
-    if level == 5:
-        (level, ship, space_obj) = download_level('Levels/6.txt')
-    if level == 6:
-        (level, ship, space_obj) = download_level('Levels/7.txt')
-    if level == 7:
-        (level, ship, space_obj) = download_level('Levels/8.txt')
-    if level == 8:
-        (level, ship, space_obj) = download_level('Levels/9.txt')
-    """"
-    if level == 9:
-        (level, ship, space_obj) = download_level('Levels/10.txt')
-    if level == 10:
-        (level, ship, space_obj) = download_level('Levels/11.txt')
-    if level == 11:
-        (level, ship, space_obj) = download_level('Levels/12.txt')
-    if level == 12:
-        (level, ship, space_obj) = download_level('Levels/13.txt')
-    if level == 13:
-        (level, ship, space_obj) = download_level('Levels/14.txt')
-    if level == 14:
-        (level, ship, space_obj) = download_level('Levels/15.txt')
-    if level == 15:
-        (level, ship, space_obj) = download_level('Levels/16.txt')
-    if level == 16:
-        (level, ship, space_obj) = download_level('Levels/17.txt')
-    if level == 17:
-        (level, ship, space_obj) = download_level('Levels/18.txt')
-    if level == 18:
-        (level, ship, space_obj) = download_level('Levels/19.txt')
-    if level == 19:
-        (level, ship, space_obj) = download_level('Levels/20.txt')
-    """
-
-    pygame.init()
     game_surface = pygame.display.set_mode((window_width, window_height))
     clock = pygame.time.Clock()
+    global finished
     finished = False
     started = False
     global timer
-    timer = 0
+    timer  = 0
     time_step = 100
-
+    (level, ship, space_obj) = download_level('Levels/2.txt')
     simulation_step(level, ship, space_obj, game_surface, time_step / 100)
     pygame.display.update()
 
@@ -130,6 +86,7 @@ def main():
             (mouse_x, mouse_y) = pygame.mouse.get_pos()
             ship.angle = (180 / math.pi) * math.atan2(ship.x - mouse_x, ship.y - mouse_y)
             create_space_ship_image(ship, game_surface)
+            update_system_position(ship, space_obj, game_surface)
             pygame.display.update()
 
     pygame.quit()

@@ -65,6 +65,9 @@ def read_obj_parameters(parameters_line, obj):
         obj.x_out = float(parameters_list[7])
         obj.y_out = float(parameters_list[8])
 
+    elif obj.type == 'Entrance':
+        obj.r = float(parameters_list[6])
+
 
 def download_level(level_file):
 

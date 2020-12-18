@@ -1,5 +1,6 @@
 Level     1 1 test True False
 
-SpaceShip 1 800 400 0 2.3 0 0
+SpaceShip 1 400 400 1 0 0 0
 
-SpaceObj  Planet 600 500 400 0 0 0 0 True False 6
+SpaceObj Planet False True 600 400 400 0 0 0 0 6
+SpaceObj  WormHole False True 600 200 0 600 600

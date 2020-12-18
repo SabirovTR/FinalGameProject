@@ -1,6 +1,9 @@
 import math
 import pygame
 
+
+backgrond = pygame.image.load('Space_objects_images/Space.jpg')
+
 window_width = 1440
 """Ширина окна"""
 
@@ -34,16 +37,27 @@ def create_space_object_image(obj, surface):
         planet_rect = transformed_surface.get_rect(center=(obj.x_out, obj.y_out))
         surface.blit(transformed_surface, planet_rect)
 
+    elif obj.type == 'Enterance':
+        pygame.draw.circle(surface, (173, 255, 47), (obj.x, obj.y), 40)
+
+
+def trace_image(ship, surface):
+
+    for step in ship.trace:
+        pygame.draw.circle(surface, (200, 200, 200), step, 2)
+
 
 def create_space_ship_image(ship, surface):
 
-    space_ship_surface = pygame.image.load('Space_objects_images/SpaceShip1.jpg').convert_alpha()
+    trace_image(ship, surface)
+
+    space_ship_surface = pygame.image.load('Space_objects_images/SpaceShip.png').convert()
     transformed_surface = pygame.transform.scale(space_ship_surface,
-                                                 (space_ship_surface.get_width() // 30,
-                                                  space_ship_surface.get_height() // 30))
+                                                 (space_ship_surface.get_width() // 40,
+                                                  space_ship_surface.get_height() // 40))
     transformed_surface = pygame.transform.rotate(transformed_surface, ship.angle)
     space_ship_rect = transformed_surface.get_rect(center=(ship.x, ship.y))
-    transformed_surface.set_colorkey((255, 255, 255))
+    transformed_surface.set_colorkey((0, 0, 0))
     surface.blit(transformed_surface, space_ship_rect)
 
 
@@ -57,13 +71,17 @@ def explosion(ship, surface):
     surface.blit(transformed_surface, explosion_rect)
 
 
+
+
 def update_system_position(ship, space_obj, surface):
+
+    surface.blit(backgrond, (0, 0))
 
     for obj in space_obj:
         create_space_object_image(obj, surface)
 
-    if ship.trace:
-        print('trace')
+    #if ship.trace:
+    #    print('trace')
 
     create_space_ship_image(ship, surface)
 
